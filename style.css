@@ -60,8 +60,8 @@ button {
 #stageText {
   position: absolute;
   bottom: 90px;
-  font-size: 22px;
-  padding: 0 20px;
+  font-size: 44px;
+  padding: 10px 16px;
   text-shadow: 0 4px 8px rgba(0,0,0,0.8);
   white-space: pre-line;
 }
@@ -74,6 +74,10 @@ button {
   background:#ff4d6d;
   color:white;
   border-radius:14px;
+}
+
+.stage img {
+  transition: opacity 0.15s ease;
 }
 
 .hidden { display:none; }
