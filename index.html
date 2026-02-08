@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You ❤️</title>
-
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>Hey baby boo 💖</h1>
+<div id="mainCard" class="card">
+  <h1>Hey baby boo 💖</h1>
 
-    <p class="message">
-      Ever since you came into my life, everything feels lighter, warmer,
-      and better. You are genuinely the light of my life.
-    </p>
+  <p class="message">
+    Ever since you came into my life, everything feels lighter,
+    warmer, and better. You are genuinely the light of my life.
+  </p>
 
-    <p class="question">
-      Will you be my Valentine this year?
-    </p>
+  <p class="question">Will you be my Valentine this year?</p>
 
-    <div class="buttons">
-      <button id="yesBtn">Yes 😘</button>
-      <button id="noBtn">No 🙃</button>
-    </div>
+  <div class="buttons">
+    <button id="yesBtn">Yes 😘</button>
+    <button id="noBtn">No 🙃</button>
   </div>
+</div>
 
-  <script src="script.js"></script>
+<!-- Overlay Stage -->
+<div id="stage" class="stage hidden">
+  <img id="stageImg" />
+  <p id="stageText"></p>
+  <button id="stageYes" class="hidden">Yes 😌</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
