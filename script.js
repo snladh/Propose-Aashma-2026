@@ -70,7 +70,7 @@ const stages = [
   { img: "ronaldo_sure.png", bottom: "" },
   { img: "parents_sure.png", bottom: "Chorii… you sure?" },
   { img: "shiva_sure.png", bottom: "Balikaa… you sure?" },
-  { img: "world_end.gif", bottom: "The Earth! Whats happening ..." }
+  { img: "world_end.gif", bottom: "The World! Whats Happening..." }
 ];
 
 
@@ -90,7 +90,12 @@ function showImage(stageData) {
   stageImg.style.opacity = 0;
   stageImg.src = "";
 
-  playBoom();
+  // SOUND LOGIC
+  if (stageData.img === "world_end.gif") {
+    setTimeout(playBoom, 3000); // delay only for GIF
+  } else {
+    playBoom();
+  }
 
   setTimeout(() => {
     stageImg.src = stageData.img;
@@ -110,7 +115,6 @@ noBtn.onclick = () => {
 
   const stageData = stages[Math.min(noClicks - 1, stages.length - 1)];
 
-  // NORMAL STAGES
   if (noClicks < 6) {
     showImage(stageData);
 
@@ -124,25 +128,22 @@ noBtn.onclick = () => {
     }, 2500);
   }
 
-  // WORLD GIF STAGE (SPECIAL)
+  // WORLD GIF STAGE
   else {
     showImage(stageData);
 
-    // No buttons on GIF
     stageYes.classList.add("hidden");
 
     setTimeout(() => {
       hideStage();
 
-      // Final message screen
       messageEl.innerText =
         "The world exploded and the NO button exploded with that.";
       questionEl.innerText =
         "Universe wants us to be together, looks like you have no choice now.";
 
-      // Remove No forever
       noBtn.style.display = "none";
-    }, 5100); // GIF viewing time
+    }, 5100); // allow full GIF
   }
 };
 
@@ -174,9 +175,9 @@ function yesFlow() {
 
     stageImg.src = "Love.PNG";
     stageText.innerText =
-      "Hehe, JK Bebu.\n" +
+      "Hehe, JK Bebu. \n" +
       "Thank you for choosing me 💖\n" +
-      "Now, I am the happiest person on Earth.";
+      "You made me the happiest person on Earth.";
 
     stageImg.onload = () => stageImg.style.opacity = 1;
   }, 3500);
