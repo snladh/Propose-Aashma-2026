@@ -7,8 +7,16 @@ const stageImg = document.getElementById("stageImg");
 const stageText = document.getElementById("stageText");
 const stageYes = document.getElementById("stageYes");
 
+const boom = document.getElementById("boomSound");
+
 let noClicks = 0;
 let hideTimer = null;
+
+function playBoom(){
+  boom.currentTime = 0;
+  boom.volume = 0.6;
+  boom.play().catch(()=>{});
+}
 
 const flow = [
   { img:"rock_sure.JPG", text:"You sure?" },
@@ -26,6 +34,8 @@ function showStage(step, autoHide=true){
   stageImg.src = step.img;
   stageText.innerText = step.text;
 
+  playBoom();
+
   stageYes.classList.add("hidden");
 
   if(hideTimer) clearTimeout(hideTimer);
@@ -34,7 +44,7 @@ function showStage(step, autoHide=true){
     hideTimer = setTimeout(()=>{
       stage.classList.add("hidden");
       mainCard.classList.remove("hidden");
-    }, 4000);
+    }, 2500);
   }
 }
 
@@ -43,13 +53,9 @@ noBtn.onclick = () => {
 
   const step = flow[Math.min(noClicks-1, flow.length-1)];
 
-  // Steps 1–5 → auto hide
   if(noClicks < 6){
     showStage(step, true);
-  }
-
-  // Step 6 → world end
-  else {
+  } else {
     mainCard.classList.add("hidden");
     stage.classList.remove("hidden");
 
@@ -60,6 +66,8 @@ noBtn.onclick = () => {
       "Universe wants us together.\n" +
       "Seems like you have no option.\n" +
       "So it’s a YES? 😌";
+
+    playBoom();
 
     stageYes.classList.remove("hidden");
     noBtn.style.display = "none";
@@ -75,6 +83,8 @@ function yesFlow(){
   stageImg.src = "sunil_sure.PNG";
   stageText.innerText = "Bebu… you sure?? 😏";
   stageYes.classList.add("hidden");
+
+  playBoom();
 
   setTimeout(()=>{
     stageImg.src = "Love.PNG";

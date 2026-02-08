@@ -37,7 +37,7 @@ button {
 #yesBtn { background:#ff4d6d; color:white; }
 #noBtn { background:#e0e0e0; }
 
-/* Stage */
+/* STAGE */
 
 .stage {
   position: fixed;
@@ -59,15 +59,16 @@ button {
 
 #stageText {
   position: absolute;
-  bottom: 80px;
+  bottom: 90px;
   font-size: 22px;
   padding: 0 20px;
   text-shadow: 0 4px 8px rgba(0,0,0,0.8);
+  white-space: pre-line;
 }
 
 #stageYes {
   position: absolute;
-  bottom: 20px;
+  bottom: 25px;
   padding: 14px 22px;
   font-size: 18px;
   background:#ff4d6d;
