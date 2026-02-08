@@ -1,48 +1,56 @@
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
+const mainCard = document.getElementById("mainCard");
+
+const stage = document.getElementById("stage");
+const stageImg = document.getElementById("stageImg");
+const stageText = document.getElementById("stageText");
+const stageYes = document.getElementById("stageYes");
 
 let noClicks = 0;
 
-noBtn.addEventListener("click", () => {
+const flow = [
+  { img:"rock_sure.JPG", text:"You sure?" },
+  { img:"luna_sure.png", text:"" },
+  { img:"ronaldo_sure.png", text:"" },
+  { img:"parents_sure.png", text:"Chorii… you sure?" },
+  { img:"shiva_sure.png", text:"Balikaa… you sure?" },
+  { img:"world_end.gif", text:"" }
+];
+
+noBtn.onclick = () => {
   noClicks++;
+  mainCard.classList.add("hidden");
+  stage.classList.remove("hidden");
 
-  // Make Yes bigger every time No is clicked
-  const scale = 1 + noClicks * 0.15;
-  yesBtn.style.transform = `scale(${scale})`;
+  const step = flow[Math.min(noClicks-1, flow.length-1)];
+  stageImg.src = step.img;
+  stageText.innerText = step.text;
 
-  // Move No button randomly (mobile-friendly)
-  const x = Math.random() * 120 - 60;
-  const y = Math.random() * 120 - 60;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-});
+  if(noClicks === 6){
+    stageText.innerText =
+      "The world is destroyed…\n" +
+      "And the NO button got destroyed with it.\n" +
+      "Universe wants us together.\n" +
+      "Seems like you have no option.\n" +
+      "So it’s a YES? 😌";
 
-yesBtn.addEventListener("click", () => {
-  document.body.innerHTML = `
-    <div style="
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      text-align:center;
-      padding: 20px;
-    ">
-      <div style="
-        background:white;
-        padding:30px;
-        border-radius:20px;
-        max-width:420px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      ">
-        <h1 style="margin-top:0;">Yayyyy 💖</h1>
-        <p style="font-size:18px;">
-          You just made me the happiest person alive.
-        </p>
-        <p style="font-size:16px;">
-          Happy Valentine’s Day, baby boo 😘
-        </p>
-      </div>
-    </div>
-  `;
-});
+    stageYes.classList.remove("hidden");
+  }
+};
+
+function yesFlow(){
+  stageImg.src = "sunil_sure.PNG";
+  stageText.innerText = "You sure?? 😏";
+  stageYes.classList.add("hidden");
+
+  setTimeout(()=>{
+    stageImg.src = "Love.PNG";
+    stageText.innerText =
+      "Thank you for choosing me Bebu 💖\n" +
+      "You made me the happiest person on Earth.";
+  }, 5000);
+}
+
+yesBtn.onclick = yesFlow;
+stageYes.onclick = yesFlow;
