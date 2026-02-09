@@ -162,7 +162,7 @@ function yesFlow() {
   mainCard.classList.add("hidden");
   stage.classList.remove("hidden");
 
-  stageText.innerText = "Bebu… you sure?? 😏";
+  stageText.innerText = "Bebu… you sure?? 😆";
   stageYes.classList.add("hidden");
 
   playBoom();
