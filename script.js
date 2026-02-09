@@ -80,7 +80,9 @@ function hideStage() {
 }
 
 
-function showImage(stageData) {
+/* ---------- SHOW IMAGE ---------- */
+
+function showImage(stageData, afterLoadCallback = null) {
   mainCard.classList.add("hidden");
   stage.classList.remove("hidden");
 
@@ -92,16 +94,21 @@ function showImage(stageData) {
 
   // SOUND LOGIC
   if (stageData.img === "world_end.gif") {
-    setTimeout(playBoom, 3000); // delay only for GIF
+    setTimeout(playBoom, 3000);
   } else {
     playBoom();
   }
 
   setTimeout(() => {
     stageImg.src = stageData.img;
+
     stageImg.onload = () => {
       stageImg.style.opacity = 1;
+
+      // TIMER STARTS ONLY AFTER IMAGE APPEARS
+      if (afterLoadCallback) afterLoadCallback();
     };
+
   }, 120);
 }
 
@@ -115,35 +122,34 @@ noBtn.onclick = () => {
 
   const stageData = stages[Math.min(noClicks - 1, stages.length - 1)];
 
+  // NORMAL STAGES
   if (noClicks < 6) {
-    showImage(stageData);
+    showImage(stageData, () => {
+      hideTimer = setTimeout(() => {
+        hideStage();
 
-    hideTimer = setTimeout(() => {
-      hideStage();
+        const text = textFlow[noClicks - 1];
+        messageEl.innerText = text.message;
+        questionEl.innerText = text.question;
 
-      const text = textFlow[noClicks - 1];
-      messageEl.innerText = text.message;
-      questionEl.innerText = text.question;
-
-    }, 2500);
+      }, 2500);
+    });
   }
 
   // WORLD GIF STAGE
   else {
-    showImage(stageData);
+    showImage(stageData, () => {
+      setTimeout(() => {
+        hideStage();
 
-    stageYes.classList.add("hidden");
+        messageEl.innerText =
+          "The world exploded and the NO button exploded with that.";
+        questionEl.innerText =
+          "Universe wants us to be together, looks like you have no choice now.";
 
-    setTimeout(() => {
-      hideStage();
-
-      messageEl.innerText =
-        "The world exploded and the NO button exploded with that.";
-      questionEl.innerText =
-        "Universe wants us to be together, looks like you have no choice now.";
-
-      noBtn.style.display = "none";
-    }, 5100); // allow full GIF
+        noBtn.style.display = "none";
+      }, 5100); // full GIF
+    });
   }
 };
 

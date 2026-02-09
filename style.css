@@ -1,4 +1,6 @@
-* { box-sizing: border-box; }
+* { 
+  box-sizing: border-box; 
+}
 
 body {
   margin: 0;
@@ -9,6 +11,8 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+/* CARD */
 
 .card {
   background: white;
@@ -34,8 +38,14 @@ button {
   cursor: pointer;
 }
 
-#yesBtn { background:#ff4d6d; color:white; }
-#noBtn { background:#e0e0e0; }
+#yesBtn { 
+  background:#ff4d6d; 
+  color:white; 
+}
+
+#noBtn { 
+  background:#e0e0e0; 
+}
 
 /* STAGE */
 
@@ -54,7 +64,8 @@ button {
 .stage img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;   /* phones */
+  transition: opacity 0.15s ease;
 }
 
 #stageText {
@@ -76,8 +87,15 @@ button {
   border-radius:14px;
 }
 
-.stage img {
-  transition: opacity 0.15s ease;
+.hidden { 
+  display:none; 
 }
 
-.hidden { display:none; }
+
+/* LAPTOP / DESKTOP IMAGE FIT FIX */
+@media (min-width: 900px) {
+  .stage img {
+    object-fit: contain;   /* show full image */
+    background: black;     /* side bars look clean */
+  }
+}
